@@ -29,7 +29,7 @@
             <!-- jquery validation -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Add slider</h3>
+                <h3 class="card-title">Edit slider</h3>
               </div>
 
               @if(Session::has('status'))
@@ -48,18 +48,19 @@
                   </div>
               @endif
 
-              {!!Form::open(['action' => 'App\Http\Controllers\SliderController@saveslider', 'method' => 'POST','enctype'=>'multipart/form-data'])!!}
+              {!!Form::open(['action' => 'App\Http\Controllers\SliderController@updateslider', 'method' => 'POST','enctype'=>'multipart/form-data'])!!}
                {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
+                    {{Form::hidden('id',$slider->id)}}
                     {{Form::label('', 'Slider description 1',['for'=>'exampleInputEmail1'])}}
-                    {{Form::text('description1','',['class'=>'form-control','id'=>'exampleInputEmail1','placeholder'=>'Enter slider description'])}}
+                    {{Form::text('description1',$slider->description1,['class'=>'form-control','id'=>'exampleInputEmail1','placeholder'=>'Enter slider description'])}}
                     {{-- <label for="exampleInputEmail1">Product name</label>
                     <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Enter product name"> --}}
                   </div>
                   <div class="form-group">
                     {{Form::label('', 'Slider description 2',['for'=>'exampleInputEmail1'])}}
-                    {{Form::text('description2','',['class'=>'form-control','id'=>'exampleInputEmail1','placeholder'=>'Enter slider description'])}}
+                    {{Form::text('description2',$slider->description2,['class'=>'form-control','id'=>'exampleInputEmail1','placeholder'=>'Enter slider description'])}}
                     {{-- <label for="exampleInputEmail1">Product price</label>
                     <input type="number" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Enter product price" min="1"> --}}
                   </div>
@@ -80,7 +81,7 @@
                 <div class="card-footer">
                   <!-- <button type="submit" class="btn btn-success">Submit</button> -->
                   {{-- <input type="submit" class="btn btn-success" value="Save"> --}}
-                  {{Form::submit('Save', ['class' => 'btn btn-warning'])}}
+                  {{Form::submit('Update', ['class' => 'btn btn-warning'])}}
                 </div>
               {{-- </form> --}}
               {!!Form::close()!!}

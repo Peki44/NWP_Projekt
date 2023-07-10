@@ -95,7 +95,7 @@
                 <div class="card-footer">
                   <!-- <button type="submit" class="btn btn-success">Submit</button> -->
                   {{-- <input type="submit" class="btn btn-success" value="Save"> --}}
-                  {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+                  {{Form::submit('Save', ['class' => 'btn btn-success'])}}
                 </div>
               {{-- </form> --}}
               {!!Form::close()!!}

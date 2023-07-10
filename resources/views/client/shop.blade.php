@@ -7,7 +7,7 @@
 @section('content')
     <!-- start content -->
 	
-    <div class="hero-wrap hero-bread" style="background-image: url('frontend/images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('{{asset('frontend/images/bg_1.jpg')}}');">
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
@@ -23,26 +23,29 @@
               <div class="row justify-content-center">
                   <div class="col-md-10 mb-5 text-center">
                       <ul class="product-category">
-                          <li><a href="#" class="active">All</a></li>
-                          <li><a href="#">Vegetables</a></li>
+                          <li><a href="{{url('/shop')}}" class="{{request()->is('shop') ? 'active' : ''}}">All</a></li>
+                          @foreach ($categories as $category)
+                          <li><a href="{{url('/view_product_by_category/'.$category->category_name)}}"class="{{request()->is('view_product_by_category/'.$category->category_name) ? 'active' : ''}}">{{$category->category_name}}</a></li>
+                          @endforeach
+                          {{-- <li><a href="#">Vegetables</a></li>
                           <li><a href="#">Fruits</a></li>
                           <li><a href="#">Juice</a></li>
-                          <li><a href="#">Dried</a></li>
+                          <li><a href="#">Dried</a></li> --}}
                       </ul>
                   </div>
               </div>
               <div class="row">
-                  <div class="col-md-6 col-lg-3 ftco-animate">
+                @foreach ($products as $product)
+                    <div class="col-md-6 col-lg-3 ftco-animate">
                       <div class="product">
-                          <a href="#" class="img-prod"><img class="img-fluid" src="frontend/images/product-1.jpg" alt="Colorlib Template">
-                              <span class="status">30%</span>
+                          <a href="#" class="img-prod"><img class="img-fluid" src="/storage/product_images/{{$product->product_image}}" alt="Colorlib Template">
                               <div class="overlay"></div>
                           </a>
                           <div class="text py-3 pb-4 px-3 text-center">
-                              <h3><a href="#">Bell Pepper</a></h3>
+                              <h3><a href="#">{{$product->product_name}}</a></h3>
                               <div class="d-flex">
                                   <div class="pricing">
-                                      <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+                                      <p class="price"><span>{{$product->product_price}}</span></p>
                                   </div>
                               </div>
                               <div class="bottom-area d-flex px-3">
@@ -61,7 +64,9 @@
                           </div>
                       </div>
                   </div>
-                  <div class="col-md-6 col-lg-3 ftco-animate">
+                @endforeach
+                  
+                  {{-- <div class="col-md-6 col-lg-3 ftco-animate">
                       <div class="product">
                           <a href="#" class="img-prod"><img class="img-fluid" src="frontend/images/product-2.jpg" alt="Colorlib Template">
                               <div class="overlay"></div>
@@ -372,8 +377,8 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
-                  </div>
+                      </div> 
+                  </div>--}}
               </div>
               <div class="row mt-5">
             <div class="col text-center">
